@@ -1,0 +1,943 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>WBM Glass, Aluminum & Steel Works</title>
+  <link href="https://fonts.googleapis.com/css2?family=Barlow:ital,wght@0,300;0,400;0,500;0,600;1,300&family=Barlow+Condensed:wght@600;700;800&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg:        #f5f6f8;
+      --white:     #ffffff;
+      --surface:   #eef0f4;
+      --navy:      #1a2540;
+      --navy-mid:  #2d3d60;
+      --steel:     #4a6080;
+      --accent:    #c8942a;
+      --accent-lt: #f0d080;
+      --text:      #1a2540;
+      --muted:     #6b7a96;
+      --border:    #dde1ea;
+      --ff:        'Barlow Condensed', sans-serif;
+      --fb:        'Barlow', sans-serif;
+    }
+
+    html { scroll-behavior: smooth; }
+    body { background: var(--bg); color: var(--text); font-family: var(--fb); font-size: 16px; line-height: 1.65; overflow-x: hidden; }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 200;
+      background: var(--white);
+      border-bottom: 1px solid var(--border);
+      padding: 0 2rem;
+      display: flex; align-items: center; justify-content: space-between;
+      height: 68px;
+      box-shadow: 0 2px 12px rgba(26,37,64,0.07);
+    }
+    .nav-brand { display: flex; align-items: center; gap: 12px; text-decoration: none; }
+    .nav-logo-mark {
+      width: 42px; height: 42px; border-radius: 8px;
+      background: var(--navy);
+      display: flex; align-items: center; justify-content: center;
+      flex-direction: column; gap: 2px;
+    }
+    .lm-top { width: 22px; height: 3px; background: var(--accent); border-radius: 2px; }
+    .lm-mid { width: 18px; height: 3px; background: #fff; border-radius: 2px; align-self: flex-start; }
+    .lm-bot { width: 22px; height: 3px; background: var(--steel); border-radius: 2px; }
+    .nav-name { font-family: var(--ff); font-weight: 800; font-size: 1.05rem; color: var(--navy); line-height: 1.1; }
+    .nav-name span { color: var(--accent); }
+    .nav-links { display: flex; align-items: center; gap: 2rem; }
+    .nav-links a { font-size: 0.88rem; font-weight: 500; color: var(--muted); text-decoration: none; transition: color 0.2s; }
+    .nav-links a:hover { color: var(--navy); }
+    .nav-cta {
+      background: var(--navy); color: #fff;
+      font-family: var(--ff); font-weight: 700; font-size: 0.9rem;
+      padding: 0.55rem 1.4rem; border-radius: 6px;
+      text-decoration: none; transition: background 0.2s;
+    }
+    .nav-cta:hover { background: var(--accent); }
+
+    /* ── HERO ── */
+    .hero {
+      min-height: 92vh;
+      background: var(--navy);
+      display: flex; align-items: center;
+      padding: 7rem 2rem 4rem;
+      position: relative; overflow: hidden;
+    }
+    .hero-pattern {
+      position: absolute; inset: 0; opacity: 0.06;
+      background-image:
+        repeating-linear-gradient(0deg, transparent, transparent 39px, rgba(255,255,255,0.6) 39px, rgba(255,255,255,0.6) 40px),
+        repeating-linear-gradient(90deg, transparent, transparent 39px, rgba(255,255,255,0.6) 39px, rgba(255,255,255,0.6) 40px);
+    }
+    .hero-bar { position: absolute; top: 0; left: 0; right: 0; height: 5px; background: linear-gradient(90deg, var(--accent) 0%, var(--accent-lt) 50%, var(--accent) 100%); }
+    .hero-inner { max-width: 1080px; margin: 0 auto; position: relative; z-index: 1; display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center; }
+    .hero-tag {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: rgba(200,148,42,0.15);
+      border: 1px solid rgba(200,148,42,0.4);
+      border-radius: 4px;
+      padding: 0.3rem 0.85rem;
+      font-size: 0.75rem; font-weight: 600; color: var(--accent-lt);
+      letter-spacing: 0.1em; text-transform: uppercase;
+      margin-bottom: 1.4rem;
+      animation: fadeUp 0.5s ease both;
+    }
+    .hero h1 {
+      font-family: var(--ff); font-weight: 800;
+      font-size: clamp(2.4rem, 4.5vw, 3.8rem);
+      line-height: 1.05; letter-spacing: -0.01em;
+      color: #fff;
+      animation: fadeUp 0.5s 0.1s ease both;
+    }
+    .hero h1 em { font-style: normal; color: var(--accent); }
+    .hero-sub {
+      margin-top: 1.2rem; font-size: 1rem; color: rgba(255,255,255,0.65);
+      font-weight: 300; max-width: 420px;
+      animation: fadeUp 0.5s 0.2s ease both;
+    }
+    .hero-ctas {
+      margin-top: 2rem; display: flex; gap: 12px; flex-wrap: wrap;
+      animation: fadeUp 0.5s 0.3s ease both;
+    }
+    .btn-gold {
+      background: var(--accent); color: #fff;
+      font-family: var(--ff); font-weight: 700; font-size: 0.95rem;
+      padding: 0.8rem 1.8rem; border-radius: 6px;
+      text-decoration: none; transition: background 0.2s, transform 0.2s;
+    }
+    .btn-gold:hover { background: #b07e20; transform: translateY(-1px); }
+    .btn-outline-w {
+      background: transparent; color: #fff;
+      font-family: var(--ff); font-weight: 700; font-size: 0.95rem;
+      padding: 0.8rem 1.8rem; border-radius: 6px;
+      text-decoration: none; border: 1px solid rgba(255,255,255,0.3);
+      transition: border-color 0.2s, background 0.2s;
+    }
+    .btn-outline-w:hover { border-color: #fff; background: rgba(255,255,255,0.08); }
+    .hero-stats { margin-top: 2.5rem; display: flex; gap: 2rem; animation: fadeUp 0.5s 0.4s ease both; }
+    .stat-item { }
+    .stat-num { font-family: var(--ff); font-size: 1.8rem; font-weight: 800; color: var(--accent); line-height: 1; }
+    .stat-lbl { font-size: 0.78rem; color: rgba(255,255,255,0.5); margin-top: 2px; }
+
+    /* hero right — material graphic */
+    .hero-visual { animation: fadeUp 0.5s 0.2s ease both; }
+    .hero-img-placeholder {
+      width: 100%; aspect-ratio: 4/3;
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 12px;
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+      gap: 12px; color: rgba(255,255,255,0.3); font-size: 0.85rem;
+      position: relative; overflow: hidden;
+    }
+    .hero-img-placeholder .ph-icon { font-size: 3rem; opacity: 0.4; }
+    .hero-img-placeholder span { font-size: 0.8rem; text-align: center; max-width: 180px; line-height: 1.4; }
+    .material-strips {
+      position: absolute; bottom: 0; left: 0; right: 0; height: 6px;
+      display: flex;
+    }
+    .ms1 { flex: 1; background: var(--accent); }
+    .ms2 { flex: 1; background: #8ea0b8; }
+    .ms3 { flex: 1; background: rgba(255,255,255,0.3); }
+
+    /* ── TRUST BAR ── */
+    .trust {
+      background: var(--white);
+      border-bottom: 1px solid var(--border);
+      padding: 1.4rem 2rem;
+      display: flex; align-items: center; justify-content: center;
+      gap: 3rem; flex-wrap: wrap;
+    }
+    .trust-item { display: flex; align-items: center; gap: 10px; font-size: 0.85rem; color: var(--muted); }
+    .trust-icon { font-size: 1.3rem; }
+    .trust-item strong { color: var(--navy); }
+
+    /* ── SHARED SECTION ── */
+    section { padding: 5rem 2rem; }
+    .container { max-width: 1080px; margin: 0 auto; }
+    .sec-label { font-size: 0.72rem; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--accent); margin-bottom: 0.6rem; }
+    .sec-title { font-family: var(--ff); font-size: clamp(1.8rem, 3.5vw, 2.6rem); font-weight: 800; line-height: 1.1; letter-spacing: -0.01em; color: var(--navy); }
+    .sec-sub { font-size: 1rem; color: var(--muted); margin-top: 0.6rem; font-weight: 300; max-width: 540px; }
+
+    /* ── SERVICES ── */
+    #services { background: var(--white); }
+    .services-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 1.5rem; margin-top: 3rem; }
+    .svc-card {
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 1.8rem;
+      transition: box-shadow 0.25s, transform 0.25s, border-color 0.25s;
+    }
+    .svc-card:hover { box-shadow: 0 8px 28px rgba(26,37,64,0.1); transform: translateY(-3px); border-color: var(--accent); }
+    .svc-icon { font-size: 2.2rem; margin-bottom: 1rem; display: block; }
+    .svc-card h3 { font-family: var(--ff); font-size: 1.15rem; font-weight: 700; color: var(--navy); margin-bottom: 0.5rem; }
+    .svc-card p { font-size: 0.88rem; color: var(--muted); line-height: 1.6; }
+    .svc-card .svc-more { display: inline-block; margin-top: 1rem; font-size: 0.82rem; font-weight: 600; color: var(--accent); text-decoration: none; }
+    .svc-more:hover { text-decoration: underline; }
+
+    /* ── PRODUCTS ── */
+    #products { background: var(--bg); }
+    .prod-header { display: flex; align-items: flex-end; justify-content: space-between; flex-wrap: wrap; gap: 1rem; margin-bottom: 2.5rem; }
+    .prod-filter { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 1.5rem; }
+    .filter-btn {
+      font-family: var(--fb); font-size: 0.82rem; font-weight: 500;
+      padding: 0.4rem 1rem; border-radius: 99px; border: 1px solid var(--border);
+      background: var(--white); color: var(--muted); cursor: pointer;
+      transition: all 0.2s;
+    }
+    .filter-btn.active, .filter-btn:hover { background: var(--navy); color: #fff; border-color: var(--navy); }
+    .products-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 1.4rem; }
+    .prod-card {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      overflow: hidden;
+      transition: box-shadow 0.25s, transform 0.25s;
+    }
+    .prod-card:hover { box-shadow: 0 10px 32px rgba(26,37,64,0.12); transform: translateY(-3px); }
+    .prod-img {
+      width: 100%; aspect-ratio: 4/3;
+      background: var(--surface);
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+      gap: 10px; color: var(--muted); position: relative; overflow: hidden;
+      border-bottom: 1px solid var(--border);
+    }
+    .prod-img .ph-big { font-size: 2.8rem; opacity: 0.35; }
+    .prod-img .ph-label { font-size: 0.78rem; text-align: center; max-width: 140px; line-height: 1.4; color: var(--muted); }
+    .prod-img .img-hint {
+      position: absolute; bottom: 8px; right: 8px;
+      background: rgba(26,37,64,0.7); color: #fff;
+      font-size: 0.68rem; padding: 3px 8px; border-radius: 4px;
+    }
+    .prod-cat-pill {
+      position: absolute; top: 10px; left: 10px;
+      font-size: 0.68rem; font-weight: 600; letter-spacing: 0.05em; text-transform: uppercase;
+      padding: 3px 9px; border-radius: 4px;
+    }
+    .pill-al  { background: #e8f0f8; color: #2d5080; }
+    .pill-st  { background: #eef0f4; color: #3a4a60; }
+    .pill-gl  { background: #e8f5f0; color: #1a6040; }
+    .pill-com { background: #fdf4e3; color: #7a5010; }
+    .prod-info { padding: 1.1rem 1.2rem 1.3rem; }
+    .prod-info h4 { font-family: var(--ff); font-size: 1rem; font-weight: 700; color: var(--navy); margin-bottom: 0.3rem; }
+    .prod-info p { font-size: 0.82rem; color: var(--muted); line-height: 1.55; }
+    .prod-footer { display: flex; align-items: center; justify-content: space-between; margin-top: 0.8rem; }
+    .prod-price { font-family: var(--ff); font-size: 0.9rem; font-weight: 700; color: var(--navy); }
+    .prod-price small { font-family: var(--fb); font-size: 0.72rem; font-weight: 400; color: var(--muted); display: block; }
+    .prod-inq {
+      font-size: 0.78rem; font-weight: 600; color: var(--accent);
+      text-decoration: none; border: 1px solid var(--accent);
+      border-radius: 5px; padding: 0.3rem 0.8rem;
+      transition: background 0.2s, color 0.2s;
+    }
+    .prod-inq:hover { background: var(--accent); color: #fff; }
+
+    /* ── WHY WBM ── */
+    #why { background: var(--navy); }
+    .why-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center; }
+    .why-left .sec-label { color: var(--accent-lt); }
+    .why-left .sec-title { color: #fff; }
+    .why-left .sec-sub { color: rgba(255,255,255,0.55); }
+    .why-points { margin-top: 2rem; display: flex; flex-direction: column; gap: 1.2rem; }
+    .why-pt { display: flex; gap: 14px; align-items: flex-start; }
+    .why-check { width: 28px; height: 28px; border-radius: 6px; background: rgba(200,148,42,0.2); border: 1px solid rgba(200,148,42,0.4); display: flex; align-items: center; justify-content: center; flex-shrink: 0; color: var(--accent); font-size: 0.9rem; margin-top: 2px; }
+    .why-pt-text h4 { font-family: var(--ff); font-size: 1rem; font-weight: 700; color: #fff; margin-bottom: 2px; }
+    .why-pt-text p { font-size: 0.85rem; color: rgba(255,255,255,0.5); line-height: 1.55; }
+    .why-right { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+    .why-stat-card { background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); border-radius: 12px; padding: 1.4rem; text-align: center; }
+    .why-stat-num { font-family: var(--ff); font-size: 2.2rem; font-weight: 800; color: var(--accent); }
+    .why-stat-lbl { font-size: 0.82rem; color: rgba(255,255,255,0.45); margin-top: 4px; }
+
+    /* ── GALLERY / PROJECTS ── */
+    #gallery { background: var(--white); }
+    .gallery-grid { display: grid; grid-template-columns: repeat(3, 1fr); grid-template-rows: auto; gap: 1.2rem; margin-top: 2.5rem; }
+    .gal-item {
+      border-radius: 10px; overflow: hidden;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      aspect-ratio: 4/3;
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+      gap: 8px; color: var(--muted);
+      position: relative;
+      transition: box-shadow 0.25s;
+    }
+    .gal-item:hover { box-shadow: 0 8px 24px rgba(26,37,64,0.12); }
+    .gal-item.large { grid-column: span 2; aspect-ratio: 16/9; }
+    .gal-icon { font-size: 2.2rem; opacity: 0.3; }
+    .gal-lbl { font-size: 0.78rem; text-align: center; max-width: 130px; line-height: 1.4; opacity: 0.6; }
+    .gal-tag { position: absolute; bottom: 10px; left: 10px; background: rgba(26,37,64,0.75); color: #fff; font-size: 0.72rem; padding: 3px 10px; border-radius: 4px; }
+
+    /* ── PROCESS ── */
+    #process { background: var(--bg); }
+    .process-steps { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 0; margin-top: 3rem; position: relative; }
+    .process-steps::before { content: ''; position: absolute; top: 28px; left: 10%; right: 10%; height: 2px; background: var(--border); z-index: 0; }
+    .proc-step { text-align: center; padding: 0 1rem; position: relative; z-index: 1; }
+    .proc-num { width: 56px; height: 56px; border-radius: 50%; background: var(--white); border: 2px solid var(--border); display: flex; align-items: center; justify-content: center; font-family: var(--ff); font-weight: 800; font-size: 1.1rem; color: var(--navy); margin: 0 auto 1.2rem; }
+    .proc-step.active .proc-num { background: var(--navy); border-color: var(--navy); color: #fff; }
+    .proc-step h4 { font-family: var(--ff); font-size: 0.95rem; font-weight: 700; color: var(--navy); margin-bottom: 0.4rem; }
+    .proc-step p { font-size: 0.82rem; color: var(--muted); line-height: 1.55; }
+
+    /* ── TESTIMONIALS ── */
+    #testimonials { background: var(--white); }
+    .test-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.4rem; margin-top: 2.5rem; }
+    .tcard { background: var(--bg); border: 1px solid var(--border); border-radius: 12px; padding: 1.6rem; transition: transform 0.2s; }
+    .tcard:hover { transform: translateY(-3px); }
+    .tcard-stars { color: var(--accent); font-size: 0.9rem; letter-spacing: 2px; margin-bottom: 0.8rem; }
+    .tcard q { font-size: 0.9rem; color: var(--text); line-height: 1.65; font-style: italic; }
+    .tcard-author { display: flex; align-items: center; gap: 10px; margin-top: 1.2rem; }
+    .tcard-av { width: 38px; height: 38px; border-radius: 50%; background: var(--navy); display: flex; align-items: center; justify-content: center; font-family: var(--ff); font-weight: 700; font-size: 0.85rem; color: var(--accent-lt); }
+    .tcard-name { font-size: 0.88rem; font-weight: 600; color: var(--navy); }
+    .tcard-role { font-size: 0.78rem; color: var(--muted); }
+
+    /* ── CONTACT ── */
+    #contact { background: var(--bg); }
+    .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: start; }
+    .contact-info h3 { font-family: var(--ff); font-size: 1.4rem; font-weight: 700; color: var(--navy); margin-bottom: 1.4rem; }
+    .cinfo-row { display: flex; gap: 12px; align-items: flex-start; margin-bottom: 1.1rem; }
+    .cinfo-icon { width: 38px; height: 38px; border-radius: 8px; background: var(--navy); display: flex; align-items: center; justify-content: center; font-size: 1rem; flex-shrink: 0; }
+    .cinfo-text strong { display: block; font-size: 0.85rem; font-weight: 600; color: var(--navy); }
+    .cinfo-text span { font-size: 0.83rem; color: var(--muted); }
+    .hours-table { margin-top: 1.5rem; }
+    .hours-row { display: flex; justify-content: space-between; font-size: 0.83rem; padding: 0.45rem 0; border-bottom: 1px solid var(--border); }
+    .hours-row strong { color: var(--navy); }
+    .hours-row span { color: var(--muted); }
+    /* form */
+    .contact-form { background: var(--white); border: 1px solid var(--border); border-radius: 14px; padding: 2rem; }
+    .contact-form h3 { font-family: var(--ff); font-size: 1.2rem; font-weight: 700; color: var(--navy); margin-bottom: 1.4rem; }
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+    .form-group { display: flex; flex-direction: column; gap: 5px; margin-bottom: 14px; }
+    .form-group label { font-size: 0.8rem; font-weight: 600; color: var(--navy); }
+    .form-group input, .form-group select, .form-group textarea {
+      border: 1px solid var(--border); border-radius: 7px;
+      padding: 0.6rem 0.85rem; font-family: var(--fb); font-size: 0.88rem;
+      color: var(--text); background: var(--bg);
+      outline: none; transition: border-color 0.2s;
+      width: 100%;
+    }
+    .form-group input:focus, .form-group select:focus, .form-group textarea:focus { border-color: var(--navy); }
+    .form-group textarea { resize: vertical; min-height: 100px; }
+    .form-submit {
+      width: 100%; padding: 0.85rem;
+      background: var(--navy); color: #fff;
+      font-family: var(--ff); font-weight: 700; font-size: 1rem;
+      border: none; border-radius: 7px; cursor: pointer;
+      transition: background 0.2s; margin-top: 4px;
+    }
+    .form-submit:hover { background: var(--accent); }
+
+    /* ── FOOTER ── */
+    footer { background: var(--navy); color: rgba(255,255,255,0.55); }
+    .footer-top { padding: 3.5rem 2rem 2.5rem; display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 3rem; max-width: 1080px; margin: 0 auto; }
+    .footer-brand p { font-size: 0.85rem; line-height: 1.65; margin-top: 1rem; max-width: 240px; }
+    .footer-col h5 { font-family: var(--ff); font-size: 0.85rem; font-weight: 700; color: #fff; letter-spacing: 0.05em; text-transform: uppercase; margin-bottom: 1rem; }
+    .footer-col a { display: block; font-size: 0.83rem; color: rgba(255,255,255,0.5); text-decoration: none; margin-bottom: 0.55rem; transition: color 0.2s; }
+    .footer-col a:hover { color: var(--accent); }
+    .footer-bot { border-top: 1px solid rgba(255,255,255,0.08); padding: 1.2rem 2rem; max-width: 1080px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; font-size: 0.78rem; }
+    .footer-logo-name { font-family: var(--ff); font-weight: 800; font-size: 1rem; color: #fff; }
+    .footer-logo-name span { color: var(--accent); }
+
+    /* ── UTILS ── */
+    @keyframes fadeUp { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: translateY(0); } }
+    .mt-3 { margin-top: 3rem; }
+
+    @media (max-width: 768px) {
+      .hero-inner { grid-template-columns: 1fr; gap: 2.5rem; }
+      .why-grid { grid-template-columns: 1fr; }
+      .contact-grid { grid-template-columns: 1fr; }
+      .gallery-grid { grid-template-columns: 1fr 1fr; }
+      .gal-item.large { grid-column: span 2; }
+      .footer-top { grid-template-columns: 1fr 1fr; }
+      .nav-links { display: none; }
+      .form-row { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 480px) {
+      .gallery-grid { grid-template-columns: 1fr; }
+      .gal-item.large { grid-column: span 1; }
+      .footer-top { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ══ NAV ══ -->
+<nav>
+  <a class="nav-brand" href="#">
+    <div class="nav-logo-mark">
+      <div class="lm-top"></div>
+      <div class="lm-mid"></div>
+      <div class="lm-bot"></div>
+    </div>
+    <div class="nav-name">WBM <span>Glass</span>, Aluminum<br>&amp; Steel Works</div>
+  </a>
+  <div class="nav-links">
+    <a href="#services">Services</a>
+    <a href="#products">Products</a>
+    <a href="#gallery">Projects</a>
+    <a href="#process">Process</a>
+    <a href="#contact">Contact</a>
+  </div>
+  <a class="nav-cta" href="#contact">Get a Quote</a>
+</nav>
+
+<!-- ══ HERO ══ -->
+<section class="hero">
+  <div class="hero-bar"></div>
+  <div class="hero-pattern"></div>
+  <div class="hero-inner">
+    <div class="hero-left">
+      <div class="hero-tag">⚙️ &nbsp;Quality Fabrication & Installation</div>
+      <h1>Premium <em>Glass,</em><br>Aluminum &<br>Steel Works</h1>
+      <p class="hero-sub">Trusted fabrication, supply, and installation services for residential, commercial, and industrial clients. Built strong. Built right.</p>
+      <div class="hero-ctas">
+        <a href="#contact" class="btn-gold">Request a Free Quote</a>
+        <a href="#products" class="btn-outline-w">View Products</a>
+      </div>
+      <div class="hero-stats">
+        <div class="stat-item">
+          <div class="stat-num">15+</div>
+          <div class="stat-lbl">Years in Business</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-num">500+</div>
+          <div class="stat-lbl">Projects Completed</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-num">100%</div>
+          <div class="stat-lbl">Client Satisfaction</div>
+        </div>
+      </div>
+    </div>
+    <div class="hero-visual">
+      <div class="hero-img-placeholder">
+        <div class="ph-icon">🏗️</div>
+        <span>Add your featured project or showroom photo here</span>
+        <div class="material-strips"><div class="ms1"></div><div class="ms2"></div><div class="ms3"></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ TRUST BAR ══ -->
+<div class="trust">
+  <div class="trust-item"><span class="trust-icon">🏅</span> <div><strong>Licensed & Insured</strong> — Certified contractor</div></div>
+  <div class="trust-item"><span class="trust-icon">📐</span> <div><strong>Custom Fabrication</strong> — Any size, any spec</div></div>
+  <div class="trust-item"><span class="trust-icon">🚚</span> <div><strong>Supply & Install</strong> — End-to-end service</div></div>
+  <div class="trust-item"><span class="trust-icon">🛡️</span> <div><strong>Workmanship Warranty</strong> — All jobs guaranteed</div></div>
+</div>
+
+<!-- ══ SERVICES ══ -->
+<section id="services">
+  <div class="container">
+    <div class="sec-label">What We Do</div>
+    <div class="sec-title">Our Core Services</div>
+    <p class="sec-sub">From concept to completion — we handle supply, custom fabrication, and professional installation for every project.</p>
+    <div class="services-grid">
+      <div class="svc-card">
+        <span class="svc-icon">🪟</span>
+        <h3>Aluminum Windows & Doors</h3>
+        <p>Casement, sliding, awning, and fixed aluminum frames — precision-made for perfect fit and long-term durability.</p>
+        <a href="#contact" class="svc-more">Inquire →</a>
+      </div>
+      <div class="svc-card">
+        <span class="svc-icon">🔩</span>
+        <h3>Steel Structures & Gates</h3>
+        <p>Custom steel gates, grilles, railings, and structural frames. Welded, treated, and finished to your specification.</p>
+        <a href="#contact" class="svc-more">Inquire →</a>
+      </div>
+      <div class="svc-card">
+        <span class="svc-icon">🔷</span>
+        <h3>Glass Works & Partitions</h3>
+        <p>Tempered, laminated, and frosted glass panels — for facades, partitions, balustrades, and shopfronts.</p>
+        <a href="#contact" class="svc-more">Inquire →</a>
+      </div>
+      <div class="svc-card">
+        <span class="svc-icon">🏠</span>
+        <h3>Roofing & Cladding</h3>
+        <p>Aluminum composite panels, corrugated sheets, and polycarbonate roofing systems for any structure.</p>
+        <a href="#contact" class="svc-more">Inquire →</a>
+      </div>
+      <div class="svc-card">
+        <span class="svc-icon">🪞</span>
+        <h3>Storefronts & Curtain Walls</h3>
+        <p>Full-height glazed facades and commercial storefronts using premium aluminum framing systems.</p>
+        <a href="#contact" class="svc-more">Inquire →</a>
+      </div>
+      <div class="svc-card">
+        <span class="svc-icon">🔧</span>
+        <h3>Repair & Maintenance</h3>
+        <p>Frame realignment, glass replacement, hardware repair, and full maintenance contracts for existing installations.</p>
+        <a href="#contact" class="svc-more">Inquire →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ PRODUCTS ══ -->
+<section id="products">
+  <div class="container">
+    <div class="prod-header">
+      <div>
+        <div class="sec-label">Product Catalog</div>
+        <div class="sec-title">Browse Our Products</div>
+        <p class="sec-sub">Click "Inquire" on any product for pricing and availability. Custom sizes and finishes available.</p>
+      </div>
+    </div>
+    <div class="prod-filter">
+      <button class="filter-btn active">All Products</button>
+      <button class="filter-btn">Aluminum</button>
+      <button class="filter-btn">Steel</button>
+      <button class="filter-btn">Glass</button>
+      <button class="filter-btn">Composite</button>
+    </div>
+    <div class="products-grid mt-3">
+
+      <!-- Product 1 -->
+      <div class="prod-card">
+        <div class="prod-img">
+          <span class="prod-cat-pill pill-al">Aluminum</span>
+          <div class="ph-big">🖼️</div>
+          <div class="ph-label">Add product photo here<br>(e.g. sliding window)</div>
+          <div class="img-hint">📷 Replace with photo</div>
+        </div>
+        <div class="prod-info">
+          <h4>Aluminum Sliding Window</h4>
+          <p>Powder-coated frame, double-track, mosquito screen included. Available in white, brown, grey.</p>
+          <div class="prod-footer">
+            <div class="prod-price">From ₱2,800 <small>per sq. meter</small></div>
+            <a href="#contact" class="prod-inq">Inquire</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Product 2 -->
+      <div class="prod-card">
+        <div class="prod-img">
+          <span class="prod-cat-pill pill-al">Aluminum</span>
+          <div class="ph-big">🚪</div>
+          <div class="ph-label">Add product photo here<br>(e.g. casement door)</div>
+          <div class="img-hint">📷 Replace with photo</div>
+        </div>
+        <div class="prod-info">
+          <h4>Aluminum Casement Door</h4>
+          <p>Single or double panel, multi-point locking, tempered glass insert. Commercial-grade profile.</p>
+          <div class="prod-footer">
+            <div class="prod-price">From ₱4,500 <small>per panel</small></div>
+            <a href="#contact" class="prod-inq">Inquire</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Product 3 -->
+      <div class="prod-card">
+        <div class="prod-img">
+          <span class="prod-cat-pill pill-st">Steel</span>
+          <div class="ph-big">🔩</div>
+          <div class="ph-label">Add product photo here<br>(e.g. steel gate)</div>
+          <div class="img-hint">📷 Replace with photo</div>
+        </div>
+        <div class="prod-info">
+          <h4>Custom Steel Gate</h4>
+          <p>Hollow section or tubular steel, powder-coated finish, manual or motorised. Any design available.</p>
+          <div class="prod-footer">
+            <div class="prod-price">Price on Request</div>
+            <a href="#contact" class="prod-inq">Inquire</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Product 4 -->
+      <div class="prod-card">
+        <div class="prod-img">
+          <span class="prod-cat-pill pill-gl">Glass</span>
+          <div class="ph-big">🔷</div>
+          <div class="ph-label">Add product photo here<br>(e.g. glass partition)</div>
+          <div class="img-hint">📷 Replace with photo</div>
+        </div>
+        <div class="prod-info">
+          <h4>Frameless Glass Partition</h4>
+          <p>12mm tempered clear or frosted glass panels with stainless fittings. Office & home use.</p>
+          <div class="prod-footer">
+            <div class="prod-price">From ₱3,200 <small>per sq. meter</small></div>
+            <a href="#contact" class="prod-inq">Inquire</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Product 5 -->
+      <div class="prod-card">
+        <div class="prod-img">
+          <span class="prod-cat-pill pill-com">Composite</span>
+          <div class="ph-big">🏗️</div>
+          <div class="ph-label">Add product photo here<br>(e.g. ACP cladding)</div>
+          <div class="img-hint">📷 Replace with photo</div>
+        </div>
+        <div class="prod-info">
+          <h4>Aluminum Composite Panel (ACP)</h4>
+          <p>Fire-rated & standard grade. Wide range of colours and finishes for facades and signage.</p>
+          <div class="prod-footer">
+            <div class="prod-price">From ₱1,600 <small>per sq. meter</small></div>
+            <a href="#contact" class="prod-inq">Inquire</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Product 6 -->
+      <div class="prod-card">
+        <div class="prod-img">
+          <span class="prod-cat-pill pill-st">Steel</span>
+          <div class="ph-big">🛡️</div>
+          <div class="ph-label">Add product photo here<br>(e.g. steel grille)</div>
+          <div class="img-hint">📷 Replace with photo</div>
+        </div>
+        <div class="prod-info">
+          <h4>Steel Window Grille</h4>
+          <p>Decorative or security grilles, custom patterns, powder-coated or painted finish.</p>
+          <div class="prod-footer">
+            <div class="prod-price">From ₱900 <small>per sq. meter</small></div>
+            <a href="#contact" class="prod-inq">Inquire</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Product 7 -->
+      <div class="prod-card">
+        <div class="prod-img">
+          <span class="prod-cat-pill pill-al">Aluminum</span>
+          <div class="ph-big">🏢</div>
+          <div class="ph-label">Add product photo here<br>(e.g. storefront system)</div>
+          <div class="img-hint">📷 Replace with photo</div>
+        </div>
+        <div class="prod-info">
+          <h4>Commercial Storefront System</h4>
+          <p>Heavy-duty aluminum framing with transom and mullion profiles. Ideal for shops and offices.</p>
+          <div class="prod-footer">
+            <div class="prod-price">Price on Request</div>
+            <a href="#contact" class="prod-inq">Inquire</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Product 8 -->
+      <div class="prod-card">
+        <div class="prod-img">
+          <span class="prod-cat-pill pill-gl">Glass</span>
+          <div class="ph-big">🪞</div>
+          <div class="ph-label">Add product photo here<br>(e.g. glass balustrade)</div>
+          <div class="img-hint">📷 Replace with photo</div>
+        </div>
+        <div class="prod-info">
+          <h4>Glass Balustrade & Railing</h4>
+          <p>Stainless steel post with tempered glass infill. For staircases, balconies, and pool fencing.</p>
+          <div class="prod-footer">
+            <div class="prod-price">From ₱5,500 <small>per linear meter</small></div>
+            <a href="#contact" class="prod-inq">Inquire</a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ══ WHY WBM ══ -->
+<section id="why">
+  <div class="container">
+    <div class="why-grid">
+      <div class="why-left">
+        <div class="sec-label">Why Choose Us</div>
+        <div class="sec-title">Built on trust.<br>Delivered with skill.</div>
+        <p class="sec-sub">Every project we take on is handled with the same care — whether it's a single window or a full commercial fit-out.</p>
+        <div class="why-points">
+          <div class="why-pt">
+            <div class="why-check">✓</div>
+            <div class="why-pt-text"><h4>Experienced Fabricators</h4><p>Our team has over 15 years of hands-on experience in aluminium, steel, and glass works.</p></div>
+          </div>
+          <div class="why-pt">
+            <div class="why-check">✓</div>
+            <div class="why-pt-text"><h4>Accurate Site Measurement</h4><p>We visit your site, take precise measurements, and ensure everything fits perfectly before fabrication begins.</p></div>
+          </div>
+          <div class="why-pt">
+            <div class="why-check">✓</div>
+            <div class="why-pt-text"><h4>On-Time Delivery & Installation</h4><p>We respect your timeline. Clear schedules and regular updates from start to handover.</p></div>
+          </div>
+          <div class="why-pt">
+            <div class="why-check">✓</div>
+            <div class="why-pt-text"><h4>Competitive & Transparent Pricing</h4><p>Detailed quotations with no hidden costs. You know exactly what you're paying for.</p></div>
+          </div>
+        </div>
+      </div>
+      <div class="why-right">
+        <div class="why-stat-card"><div class="why-stat-num">15+</div><div class="why-stat-lbl">Years of Experience</div></div>
+        <div class="why-stat-card"><div class="why-stat-num">500+</div><div class="why-stat-lbl">Projects Delivered</div></div>
+        <div class="why-stat-card"><div class="why-stat-num">50+</div><div class="why-stat-lbl">Regular Clients</div></div>
+        <div class="why-stat-card"><div class="why-stat-num">100%</div><div class="why-stat-lbl">Satisfaction Rate</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ PROJECT GALLERY ══ -->
+<section id="gallery">
+  <div class="container">
+    <div class="sec-label">Our Work</div>
+    <div class="sec-title">Completed Projects</div>
+    <p class="sec-sub">A selection of residential and commercial projects. Replace placeholders with your own project photos.</p>
+    <div class="gallery-grid">
+      <div class="gal-item large">
+        <div class="gal-icon">🏢</div>
+        <div class="gal-lbl">Add large featured project photo here</div>
+        <div class="gal-tag">Commercial Storefront — Makati</div>
+      </div>
+      <div class="gal-item">
+        <div class="gal-icon">🪟</div>
+        <div class="gal-lbl">Add project photo here</div>
+        <div class="gal-tag">Aluminum Windows</div>
+      </div>
+      <div class="gal-item">
+        <div class="gal-icon">🔩</div>
+        <div class="gal-lbl">Add project photo here</div>
+        <div class="gal-tag">Steel Gate</div>
+      </div>
+      <div class="gal-item">
+        <div class="gal-icon">🔷</div>
+        <div class="gal-lbl">Add project photo here</div>
+        <div class="gal-tag">Glass Partition</div>
+      </div>
+      <div class="gal-item">
+        <div class="gal-icon">🏠</div>
+        <div class="gal-lbl">Add project photo here</div>
+        <div class="gal-tag">ACP Cladding</div>
+      </div>
+      <div class="gal-item large">
+        <div class="gal-icon">🪞</div>
+        <div class="gal-lbl">Add large project photo here</div>
+        <div class="gal-tag">Glass Balustrade — Residential</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ PROCESS ══ -->
+<section id="process">
+  <div class="container">
+    <div class="sec-label">How It Works</div>
+    <div class="sec-title">Our Simple Process</div>
+    <p class="sec-sub">From your first inquiry to final handover — straightforward and stress-free.</p>
+    <div class="process-steps">
+      <div class="proc-step active">
+        <div class="proc-num">1</div>
+        <h4>Inquiry & Consultation</h4>
+        <p>Tell us what you need. We'll advise on the best materials and approach for your project.</p>
+      </div>
+      <div class="proc-step active">
+        <div class="proc-num">2</div>
+        <h4>Site Visit & Measurement</h4>
+        <p>Our team visits your site, takes accurate measurements, and assesses the installation conditions.</p>
+      </div>
+      <div class="proc-step active">
+        <div class="proc-num">3</div>
+        <h4>Quotation & Approval</h4>
+        <p>We provide a detailed, itemised quote. Once approved, we confirm the schedule and begin fabrication.</p>
+      </div>
+      <div class="proc-step active">
+        <div class="proc-num">4</div>
+        <h4>Fabrication & Delivery</h4>
+        <p>All items are precision-fabricated in our workshop, then delivered and installed by our own team.</p>
+      </div>
+      <div class="proc-step active">
+        <div class="proc-num">5</div>
+        <h4>Inspection & Handover</h4>
+        <p>Final walkthrough with the client. We don't close the job until you're 100% satisfied.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ TESTIMONIALS ══ -->
+<section id="testimonials">
+  <div class="container">
+    <div class="sec-label">Client Feedback</div>
+    <div class="sec-title">What Our Clients Say</div>
+    <div class="test-grid">
+      <div class="tcard">
+        <div class="tcard-stars">★★★★★</div>
+        <q>WBM did all the aluminum windows and steel grilles for our new house. Very clean work, exact measurements, and finished ahead of schedule. Highly recommended!</q>
+        <div class="tcard-author">
+          <div class="tcard-av">RS</div>
+          <div>
+            <div class="tcard-name">Ramon Santos</div>
+            <div class="tcard-role">Homeowner, Quezon City</div>
+          </div>
+        </div>
+      </div>
+      <div class="tcard">
+        <div class="tcard-stars">★★★★★</div>
+        <q>We hired WBM for our office glass partitions. Professional team, great pricing, and the result looks excellent. Already planning to use them for our second branch.</q>
+        <div class="tcard-author">
+          <div class="tcard-av">MC</div>
+          <div>
+            <div class="tcard-name">Maria Cruz</div>
+            <div class="tcard-role">Business Owner, Pasig</div>
+          </div>
+        </div>
+      </div>
+      <div class="tcard">
+        <div class="tcard-stars">★★★★★</div>
+        <q>The storefront they installed transformed our shop. ACP cladding, glass frontage — top quality. The team was easy to work with and very responsive to changes.</q>
+        <div class="tcard-author">
+          <div class="tcard-av">JR</div>
+          <div>
+            <div class="tcard-name">Jose Reyes</div>
+            <div class="tcard-role">Retail Store Owner, Makati</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ CONTACT ══ -->
+<section id="contact">
+  <div class="container">
+    <div class="sec-label">Get In Touch</div>
+    <div class="sec-title">Request a Free Quote</div>
+    <p class="sec-sub">Fill out the form and we'll get back to you within 24 hours with a detailed estimate.</p>
+    <div class="contact-grid mt-3">
+      <div class="contact-info">
+        <h3>Contact Information</h3>
+        <div class="cinfo-row">
+          <div class="cinfo-icon">📍</div>
+          <div class="cinfo-text">
+            <strong>Address</strong>
+            <span>123 Fabrication Road, Your City, Province</span>
+          </div>
+        </div>
+        <div class="cinfo-row">
+          <div class="cinfo-icon">📞</div>
+          <div class="cinfo-text">
+            <strong>Phone / Viber</strong>
+            <span>+63 9XX XXX XXXX</span>
+          </div>
+        </div>
+        <div class="cinfo-row">
+          <div class="cinfo-icon">📧</div>
+          <div class="cinfo-text">
+            <strong>Email</strong>
+            <span>info@wbmworks.com</span>
+          </div>
+        </div>
+        <div class="cinfo-row">
+          <div class="cinfo-icon">💬</div>
+          <div class="cinfo-text">
+            <strong>Facebook Page</strong>
+            <span>facebook.com/WBMGlassAluminum</span>
+          </div>
+        </div>
+        <div class="hours-table">
+          <div class="hours-row"><strong>Monday – Friday</strong><span>8:00 AM – 5:30 PM</span></div>
+          <div class="hours-row"><strong>Saturday</strong><span>8:00 AM – 12:00 PM</span></div>
+          <div class="hours-row"><strong>Sunday</strong><span>Closed</span></div>
+        </div>
+      </div>
+      <div class="contact-form">
+        <h3>Send Us a Message</h3>
+        <div class="form-row">
+          <div class="form-group">
+            <label>Your Name *</label>
+            <input type="text" placeholder="Juan dela Cruz" />
+          </div>
+          <div class="form-group">
+            <label>Phone / Viber *</label>
+            <input type="tel" placeholder="+63 9XX XXX XXXX" />
+          </div>
+        </div>
+        <div class="form-group">
+          <label>Email Address</label>
+          <input type="email" placeholder="you@example.com" />
+        </div>
+        <div class="form-group">
+          <label>Type of Work Needed</label>
+          <select>
+            <option>-- Select a service --</option>
+            <option>Aluminum Windows & Doors</option>
+            <option>Steel Gates & Grilles</option>
+            <option>Glass Works & Partitions</option>
+            <option>Roofing & Cladding</option>
+            <option>Storefront / Curtain Wall</option>
+            <option>Repair & Maintenance</option>
+            <option>Other</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Project Details</label>
+          <textarea placeholder="Describe your project — dimensions, materials, location, timeline..."></textarea>
+        </div>
+        <button class="form-submit">Send Inquiry →</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ FOOTER ══ -->
+<footer>
+  <div class="footer-top">
+    <div class="footer-brand">
+      <div class="footer-logo-name">WBM <span>Glass</span>, Aluminum &amp; Steel Works</div>
+      <p>Quality fabrication and installation of aluminum, glass, and steel products for homes and businesses. Trusted for over 15 years.</p>
+    </div>
+    <div class="footer-col">
+      <h5>Services</h5>
+      <a href="#services">Aluminum Windows</a>
+      <a href="#services">Steel Gates & Grilles</a>
+      <a href="#services">Glass Partitions</a>
+      <a href="#services">Roofing & Cladding</a>
+      <a href="#services">Storefronts</a>
+    </div>
+    <div class="footer-col">
+      <h5>Company</h5>
+      <a href="#why">About WBM</a>
+      <a href="#gallery">Our Projects</a>
+      <a href="#testimonials">Client Reviews</a>
+      <a href="#process">Our Process</a>
+    </div>
+    <div class="footer-col">
+      <h5>Contact</h5>
+      <a href="#">📞 +63 9XX XXX XXXX</a>
+      <a href="#">📧 info@wbmworks.com</a>
+      <a href="#">💬 Facebook Page</a>
+      <a href="#">📍 Get Directions</a>
+    </div>
+  </div>
+  <div class="footer-bot">
+    <span>© 2025 WBM Glass, Aluminum & Steel Works. All rights reserved.</span>
+    <span>Fabricated with care — every job, every time.</span>
+  </div>
+</footer>
+
+<script>
+  // Filter buttons (visual toggle only)
+  document.querySelectorAll('.filter-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+    });
+  });
+
+  // Form submit feedback
+  document.querySelector('.form-submit').addEventListener('click', function() {
+    this.textContent = '✓ Message Sent! We\'ll contact you soon.';
+    this.style.background = '#2a7a4a';
+    setTimeout(() => {
+      this.textContent = 'Send Inquiry →';
+      this.style.background = '';
+    }, 3000);
+  });
+</script>
+</body>
+</html>
